@@ -1,0 +1,47 @@
+############################################
+#
+#  Specs for pH Simulator;
+#    a script to psuedorandomly generate 
+#    in-mouth pH datasets with manual
+#    bias for time-specific pH trends
+#
+############################################
+
+Output:
+
+    6 months of pH data formatted exactly
+    as data would be received from sensor
+
+          a.aa,bb.b,cccc,dddd
+
+    a = calibrated pH ; 2.0 <= cal pH <= 10.0
+        calibrated pH must have 3 sig figs
+
+    b = temperature in degrees celsius
+        temperature must have 3 sig figs
+
+    c = batttery level in millivolts
+
+    d = isfet raw output in millivolts
+
+    * Data should be prefixed with a
+      timestamp (yyyy-mm-dd hh:mm:ss) UTC
+
+    Total rows; 262,800 min / 5 min = 52,560 rows
+
+Logic:
+
+    pH level randomization:
+
+    - set of pH values with distribution more
+      heavily weighted around neutral value
+    - While formatting rows, randomly select
+      pH value from this set
+
+    - Set period of time (night, lunch, etc)
+      where pH selection will be be more
+      heavily weighted to non-nuetral pH
+    - Whenever row formatter chooses a time
+      within set period for varied weighting,
+      randomly pick pH from that set  instead
+            
